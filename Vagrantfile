@@ -14,6 +14,7 @@ Vagrant.configure('2') do |config|
     db_config.vm.provision :ansible do |ansible|
       ansible.playbook = 'mysqlserver.yml'
       ansible.groups = { dbservers: [:db] }
+      ansible.verbose = 'vvv'
     end
   end
 
@@ -30,6 +31,7 @@ Vagrant.configure('2') do |config|
     web_config.vm.provision :ansible do |ansible|
       ansible.playbook = 'railsserver.yml'
       ansible.groups = { railsservers: [:web] }
+      ansible.verbose = 'vvv'
     end
   end
 end

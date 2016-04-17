@@ -1,0 +1,18 @@
+---
+- name: update apt cache
+  apt: update_cache=yes
+
+- name: Install common packages
+  apt: pkg={{item}} state=installed
+  with_items:
+    - build-essential
+    - libssl-dev
+    - libreadline-dev
+    - zlib1g-dev
+    - git
+    - curl
+
+- name: Install host-specific packages
+  apt: pkg={{ item }} state=installed
+  when: host_specific_packages is defined
+  with_items: host_specific_packages

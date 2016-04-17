@@ -1,0 +1,11 @@
+---
+- hosts: webservers
+  sudo: true
+  gather_facts: false
+  vars:
+    ruby_version: 2.1.5
+    host_specific_packages:
+      - nodejs
+  roles:
+    - common
+    - rbenv

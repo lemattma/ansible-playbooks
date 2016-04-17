@@ -12,7 +12,7 @@ Vagrant.configure('2') do |config|
     end
 
     db_config.vm.provision :ansible do |ansible|
-      ansible.playbook = 'dbservers.yml'
+      ansible.playbook = 'mysqlserver.yml'
       ansible.groups = { dbservers: [:db] }
     end
   end
@@ -28,7 +28,7 @@ Vagrant.configure('2') do |config|
     end
 
     web_config.vm.provision :ansible do |ansible|
-      ansible.playbook = 'webservers.yml'
+      ansible.playbook = 'railsserver.yml'
       ansible.groups = { webservers: [:web] }
     end
   end

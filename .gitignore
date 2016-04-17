@@ -1,0 +1,10 @@
+# OS-specific
+.DS_Store
+
+# Vagrant
+acceptance_config.yml
+boxes/*
+/.vagrant
+/website/.vagrant
+/website/build
+/vagrant-spec.config.rb

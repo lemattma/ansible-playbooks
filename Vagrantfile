@@ -29,7 +29,7 @@ Vagrant.configure('2') do |config|
 
     web_config.vm.provision :ansible do |ansible|
       ansible.playbook = 'railsserver.yml'
-      ansible.groups = { webservers: [:web] }
+      ansible.groups = { railsservers: [:web] }
     end
   end
 end

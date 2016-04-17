@@ -1,0 +1,17 @@
+---
+- name: Create group
+  group: name={{ group }} state=present
+
+- name: Ensure sudoers.d is enabled
+  lineinfile: dest=/etc/sudoers state=present backup=yes regexp='^#includedir /etc/sudoers.d' line='#includedir /etc/sudoers.d'
+
+- name: Set up password-less sudo for user
+  copy: content="%{{ user }} ALL=(ALL) NOPASSWD:ALL" dest="/etc/sudoers.d/{{ user }}" owner=root group=root mode=0440
+
+- name: Create user
+  user: name={{ user }} state=present group={{ group }} shell=/bin/bash
+
+- name: Set up authorized_keys for the root user
+  authorized_key: user={{ user }} key="{{ item }}"
+  with_file:
+    - public_keys/deploy.pub

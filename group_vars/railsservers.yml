@@ -1,4 +1,6 @@
 ---
+user: deploy
+group: deploy
 ruby_version: 2.1.5
 host_specific_packages:
   - nodejs

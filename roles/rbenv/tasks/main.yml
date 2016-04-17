@@ -1,29 +1,29 @@
 - name: Install rbenv
   git: repo=https://github.com/sstephenson/rbenv.git dest=~/.rbenv update=no
-  sudo: no
+  become_user: "{{ user }}"
 
 - name: Ensure presence of bash_profile
   copy: content='' dest=~/.bash_profile force=no
-  sudo: no
+  become_user: "{{ user }}"
 
 - name: Add rbenv to PATH
   lineinfile: dest=~/.bash_profile state=present line='export PATH="$HOME/.rbenv/bin:$PATH"'
-  sudo: no
+  become_user: "{{ user }}"
 
 - name: Add rbenv shell integration
   lineinfile: dest=~/.bash_profile state=present line='eval "$(rbenv init -)"'
-  sudo: no
+  become_user: "{{ user }}"
 
 - name: Install ruby-build
   git: repo=https://github.com/sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build update=no
-  sudo: no
+  become_user: "{{ user }}"
 
 - name: Install Ruby
   command: "/bin/bash -l -c 'rbenv install -s {{ ruby_version }}'"
-  sudo: no
   when: ruby_version is defined
+  become_user: "{{ user }}"
 
 - name: Install bundler
   command: "/bin/bash -l -c 'rbenv local {{ ruby_version }}; gem install --no-document --conservative bundler'"
-  sudo: no
   when: ruby_version is defined
+  become_user: "{{ user }}"

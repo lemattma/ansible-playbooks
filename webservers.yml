@@ -1,0 +1,11 @@
+---
+- hosts: webservers
+  sudo: true
+  gather_facts: false
+  vars:
+    document_root: /vagrant
+  pre_tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+  roles:
+    - webserver

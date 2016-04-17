@@ -1,11 +1,9 @@
 ---
-- hosts: all
+- hosts: dbservers
   sudo: true
-  vars:
-    document_root: /vagrant
+  gather_facts: false
   pre_tasks:
     - name: update apt cache
       apt: update_cache=yes
   roles:
-    - webserver
     - database
